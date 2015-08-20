@@ -5,10 +5,12 @@ MAINTAINER SequenceIQ
 RUN curl -s http://d3kbcqa49mib13.cloudfront.net/spark-1.4.1-bin-hadoop2.6.tgz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s spark-1.4.1-bin-hadoop2.6 spark
 ENV SPARK_HOME /usr/local/spark
-RUN rm $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
-RUN rm $HADOOP_PREFIX/etc/hadoop/core-site.xml
-ADD mesos-remote-client/core-site.xml $HADOOP_PREFIX/etc/hadoop
-ADD mesos-remote-client/mapred-site.xml $HADOOP_PREFIX/etc/hadoop
+#RUN rm $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
+#RUN rm $HADOOP_PREFIX/etc/hadoop/core-site.xml
+RUN mkdir $HADOOP_PREFIX/yarn-remote-client
+ADD mesos-remote-client $HADOOP_PREFIX/mesos-remote-client
+cp $HADOOP_PREFIX/mesos-remote-client/core-site.xml $HADOOP_PREFIX/etc/hadoop
+cp $HADOOP_PREFIX/mesos-remote-client/mapred-site.xml $HADOOP_PREFIX/etc/hadoop
 #RUN mkdir $SPARK_HOME/yarn-remote-client
 #ADD yarn-remote-client $SPARK_HOME/yarn-remote-client
 
