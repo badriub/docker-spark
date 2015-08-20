@@ -9,8 +9,8 @@ ENV SPARK_HOME /usr/local/spark
 #RUN rm $HADOOP_PREFIX/etc/hadoop/core-site.xml
 RUN mkdir $HADOOP_PREFIX/yarn-remote-client
 ADD mesos-remote-client $HADOOP_PREFIX/mesos-remote-client
-COPY $HADOOP_PREFIX/mesos-remote-client/core-site.xml $HADOOP_PREFIX/etc/hadoop
-COPY $HADOOP_PREFIX/mesos-remote-client/mapred-site.xml $HADOOP_PREFIX/etc/hadoop
+RUN cp $HADOOP_PREFIX/mesos-remote-client/core-site.xml $HADOOP_PREFIX/etc/hadoop
+RUN cp $HADOOP_PREFIX/mesos-remote-client/mapred-site.xml $HADOOP_PREFIX/etc/hadoop
 #RUN mkdir $SPARK_HOME/yarn-remote-client
 #ADD yarn-remote-client $SPARK_HOME/yarn-remote-client
 
